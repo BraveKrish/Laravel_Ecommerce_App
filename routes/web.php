@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\auth\AuthenticationController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\site\AboutController;
 use App\Http\Controllers\site\HomeController;
@@ -19,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
+// auth route
+Route::get('/',[AuthenticationController::class,'showLogin']);
+Route::get('/forget-password',[AuthenticationController::class,'showForgetPassword'])->name('forget.password');
 
 
 // dashboard routes goes here
@@ -31,5 +35,5 @@ Route::get('/admin/products', function(){
 
 
 // web routes goes here
-Route::get('/',[HomeController::class,'index']);
+// Route::get('/',[HomeController::class,'index']);
 Route::get('/about',[AboutController::class,'index'])->name('about');
