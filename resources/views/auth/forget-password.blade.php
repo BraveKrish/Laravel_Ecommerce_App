@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forgot Password</title>
     <!-- Bootstrap CSS -->
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"> --}}
+
+    <link rel="stylesheet" href="{{ asset('dashboard/assets/bootstrap/css/bootstrap.min.css') }}">
     <style>
         body {
             background-color: #f8f9fa;
@@ -75,7 +77,7 @@
                             </div>
                         </div>
                         <button type="submit" class="btn btn-primary mb-3">Send Reset Link</button>
-                        <a href="#" class="btn btn-outline-secondary">Back to Login</a>
+                        <a href="{{ route('login.page') }}" class="btn btn-outline-secondary">Back to Login</a>
                     </form>
                 </div>
                 <div class="card-footer text-center py-3">
@@ -86,6 +88,8 @@
     </div>
 
     <!-- Bootstrap Bundle with Popper -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script> --}}
+
+    <script src="{{ asset('dashboard/assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
 </body>
 </html>

@@ -10,9 +10,9 @@
                 <button class="btn btn-sm btn-outline-secondary me-2">
                     <i class="fas fa-download fa-sm"></i> Generate Report
                 </button>
-                <button class="btn btn-sm btn-primary">
+                <a href="{{ route('create.product') }}"><button class="btn btn-sm btn-primary">
                     <i class="fas fa-plus fa-sm"></i> New Product
-                </button>
+                </button></a>
             </div>
         </div>
 

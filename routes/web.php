@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\auth\AuthenticationController;
 use App\Http\Controllers\dashboard\DashboardController;
+use App\Http\Controllers\dashboard\ProductController;
 use App\Http\Controllers\site\AboutController;
 use App\Http\Controllers\site\HomeController;
 use Illuminate\Support\Facades\Route;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // auth route
-Route::get('/',[AuthenticationController::class,'showLogin']);
+Route::get('/',[AuthenticationController::class,'showLogin'])->name('login.page');
 Route::get('/forget-password',[AuthenticationController::class,'showForgetPassword'])->name('forget.password');
 
 
@@ -29,9 +30,8 @@ Route::get('/forget-password',[AuthenticationController::class,'showForgetPasswo
 Route::get('/admin',[DashboardController::class,'home'])->name('admin.home');
 
 // product routes
-Route::get('/admin/products', function(){
-    return view('dashboard.product.products');
-})->name('admin.products');
+Route::get('/admin/products', [ProductController::class,'index'])->name('admin.products');
+Route::get('/admin/create-product',[ProductController::class, 'create'])->name('create.product');
 
 
 // web routes goes here
