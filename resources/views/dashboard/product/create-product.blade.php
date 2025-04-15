@@ -29,8 +29,23 @@
                         <div class="card-header bg-primary text-white">
                             <h5 class="mb-0">Add New Product</h5>
                         </div>
+
+                        @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                        @endif
+
+                        @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                        @endif
+
+                        {{-- {{ $categories }} --}}
                         <div class="card-body">
-                            <form>
+                            <form action="{{ route('prodcut.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
                                 <!-- Product Information Section -->
                                 <div class="card mb-4">
                                     <div class="card-header bg-light">
@@ -39,28 +54,26 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label for="productName" class="form-label">Product Name</label>
-                                            <input type="text" class="form-control" id="productName" placeholder="Enter product name" required>
+                                            <input type="text" class="form-control" id="productName" name="name" placeholder="Enter product name" required>
                                         </div>
                                         
                                         <div class="mb-3">
                                             <label for="productCategory" class="form-label">Category</label>
-                                            <select class="form-select" id="productCategory" required>
+                                            <select class="form-select" id="productCategory" name="category_id" required>
                                                 <option value="" selected disabled>Select category</option>
-                                                <option value="electronics">Electronics</option>
-                                                <option value="clothing">Clothing</option>
-                                                <option value="books">Books</option>
-                                                <option value="home">Home & Kitchen</option>
-                                                <option value="other">Other</option>
+                                                @foreach ($categories as $category)
+                                                <option value="{{ $category->id }}">{{ $category->title }}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                         
                                         <div class="mb-3">
                                             <label for="productDescription" class="form-label">Description</label>
-                                            <textarea class="form-control" id="productDescription" rows="3" placeholder="Enter product description"></textarea>
+                                            <textarea class="form-control" id="productDescription" name="description" rows="3" placeholder="Enter product description"></textarea>
                                         </div>
                                         
                                         <div class="mb-3 form-check">
-                                            <input type="checkbox" class="form-check-input" id="featuredProduct">
+                                            <input type="checkbox" class="form-check-input" id="featuredProduct" name="is_featured">
                                             <label class="form-check-label" for="featuredProduct">Featured Product</label>
                                         </div>
                                     </div>
@@ -75,23 +88,23 @@
                                         <div class="row mb-3">
                                             <div class="col-md-6">
                                                 <label for="productPrice" class="form-label">Price ($)</label>
-                                                <input type="number" class="form-control" id="productPrice" placeholder="0.00" step="0.01" min="0" required>
+                                                <input type="number" class="form-control" id="productPrice" name="price" placeholder="0.00" step="0.01" min="0" required>
                                             </div>
                                             <div class="col-md-6">
                                                 <label for="productSalePrice" class="form-label">Sale Price ($) (Optional)</label>
-                                                <input type="number" class="form-control" id="productSalePrice" placeholder="0.00" step="0.01" min="0">
+                                                <input type="number" name="sale_price" class="form-control" id="productSalePrice" placeholder="0.00" step="0.01" min="0">
                                             </div>
                                         </div>
                                         
                                         <div class="row">
                                             <div class="col-md-6">
                                                 <label for="productQuantity" class="form-label">Quantity in Stock</label>
-                                                <input type="number" class="form-control" id="productQuantity" placeholder="0" min="0" required>
+                                                <input type="number" class="form-control" id="productQuantity" name="qty" placeholder="0" min="0" required>
                                             </div>
-                                            <div class="col-md-6">
+                                            {{-- <div class="col-md-6">
                                                 <label for="productSKU" class="form-label">SKU</label>
                                                 <input type="text" class="form-control" id="productSKU" placeholder="Enter SKU">
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -104,7 +117,7 @@
                                     <div class="card-body">
                                         <div class="mb-3">
                                             <label for="productImage" class="form-label">Product Image</label>
-                                            <input type="file" class="form-control" id="productImage" accept="image/*" onchange="previewImage(this)">
+                                            <input type="file" class="form-control" name="featured_image" id="productImage" accept="image/*" onchange="previewImage(this)">
                                             <div class="mt-3">
                                                 <p class="text-muted small">Preview:</p>
                                                 <div class="text-center p-3 border rounded" id="imagePreviewContainer">

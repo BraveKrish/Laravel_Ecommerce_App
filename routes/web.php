@@ -32,6 +32,7 @@ Route::get('/admin',[DashboardController::class,'home'])->name('admin.home');
 // product routes
 Route::get('/admin/products', [ProductController::class,'index'])->name('admin.products');
 Route::get('/admin/create-product',[ProductController::class, 'create'])->name('create.product');
+Route::post('/product/store',[ProductController::class,'store'])->name('prodcut.store');
 
 
 // web routes goes here
