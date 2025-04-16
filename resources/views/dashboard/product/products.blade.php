@@ -83,6 +83,7 @@
          <!-- Products Table -->
          <div class="card shadow mb-4">
             <div class="card-body">
+                {{-- {{ $products }} --}}
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
                         <thead class="table-light">
@@ -93,16 +94,21 @@
                                     </div>
                                 </th>
                                 <th>Product</th>
-                                <th>SKU</th>
+                                {{-- <th>SKU</th> --}}
                                 <th>Category</th>
                                 <th>Price</th>
+                                <th>Sale Price</th>
                                 <th>Stock</th>
+                                <th>Is Featured</th>
                                 <th>Status</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             <!-- Product 1 -->
+                            @foreach ($products as $product)
+                                {{-- {{ $product->category_id }} --}}
+                            
                             <tr>
                                 <td>
                                     <div class="form-check">
@@ -111,27 +117,37 @@
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        <img src="/api/placeholder/50/50" class="product-image me-3" alt="iPhone 13 Pro">
+                                        {{-- <img src="/api/placeholder/50/50" class="product-image me-3" alt="iPhone 13 Pro"> --}}
                                         <div>
-                                            <div class="fw-medium">iPhone 13 Pro</div>
-                                            <div class="text-muted small">Apple</div>
+                                            <div class="fw-medium">{{ $product->name }}</div>
+                                            {{-- <div class="text-muted small">Apple</div> --}}
                                         </div>
                                     </div>
                                 </td>
-                                <td>IP-13PRO-128</td>
-                                <td><span class="badge category-badge badge-electronics">Electronics</span></td>
-                                <td>$999.00</td>
-                                <td>145</td>
-                                <td><span class="product-status status-active"></span> Active</td>
+                                <td>{{ $product->category_id }}</td>
+                                {{-- <td><span class="badge category-badge badge-electronics">Electronics</span></td> --}}
+                                <td>${{ $product->price }}</td>
+                                <td>${{ $product->sale_price }}</td>
+                                <td>{{ $product->qty }}</td>
+                                <td>
+                                    @if ($product->is_featured == 1)
+                                    <span class="badge category-badge badge-electronics">Yes</span>
+                                    @else
+                                    <span class="badge category-badge badge-electronics">No</span>
+                                    @endif
+                                </td>
+                                <td><span class="product-status status-active"></span> {{ $product->status == 1 ? 'Active' : 'Inactive' }}</td>
                                 <td class="table-actions">
-                                    <button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-eye"></i></button>
-                                    <button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button>
-                                    <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                    <a href="{{ $product->id }}"><button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-eye"></i></button></a>
+                                    <a href="{{ $product->id }}"><button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button></a>
+                                    <a href="{{ $product->id }}"><button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></a>
                                 </td>
                             </tr>
+
+                            @endforeach
                             
                             <!-- Product 2 -->
-                            <tr>
+                            {{-- <tr>
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input product-select" type="checkbox">
@@ -156,10 +172,10 @@
                                     <button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             
                             <!-- Product 3 -->
-                            <tr>
+                            {{-- <tr>
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input product-select" type="checkbox">
@@ -184,10 +200,10 @@
                                     <button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             
                             <!-- Product 4 -->
-                            <tr>
+                            {{-- <tr>
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input product-select" type="checkbox">
@@ -212,10 +228,10 @@
                                     <button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             
                             <!-- Product 5 -->
-                            <tr>
+                            {{-- <tr>
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input product-select" type="checkbox">
@@ -240,10 +256,10 @@
                                     <button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             
                             <!-- Product 6 -->
-                            <tr>
+                            {{-- <tr>
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input product-select" type="checkbox">
@@ -268,10 +284,10 @@
                                     <button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             
                             <!-- Product 7 -->
-                            <tr>
+                            {{-- <tr>
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input product-select" type="checkbox">
@@ -296,10 +312,10 @@
                                     <button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
                                 </td>
-                            </tr>
+                            </tr> --}}
                             
                             <!-- Product 8 -->
-                            <tr>
+                            {{-- <tr>
                                 <td>
                                     <div class="form-check">
                                         <input class="form-check-input product-select" type="checkbox">
@@ -324,7 +340,7 @@
                                     <button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button>
                                     <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
                                 </td>
-                            </tr>
+                            </tr> --}}
                         </tbody>
                     </table>
                 </div>

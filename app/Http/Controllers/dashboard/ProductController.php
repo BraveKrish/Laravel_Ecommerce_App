@@ -12,7 +12,12 @@ class ProductController extends Controller
 {
     public function index()
     {
-        return view('dashboard.product.products');
+        $products = Product::all();
+        // $products = Product::where('status',1)->get();
+        // $products = Product::orderBy('created_at','desc')
+        //     ->where('status',1)->get();
+        // dd($products->toArray());
+        return view('dashboard.product.products',compact('products'));
     }
 
     public function create()
@@ -31,7 +36,7 @@ class ProductController extends Controller
             $data = $request->validate([
                 'name' => 'required|string|max:255',
                 'category_id' => 'required',
-                'description' => 'nullable|string',
+                'description' => 'nullable',
                 'is_featured' => 'nullable|string',
                 'price' => 'required',
                 'sale_price' => 'nullable',
@@ -46,7 +51,7 @@ class ProductController extends Controller
 
             Product::create($data);
 
-            return redirect()->route('create.product')->with('success', 'Product Created Successfully!!!');
+            return redirect()->route('admin.products')->with('success', 'Product Created Successfully!!!');
         } catch (\Exception $e) {
             return redirect()->route('create.product')->with('error', 'something went wrong' . $e->getMessage());
         }
