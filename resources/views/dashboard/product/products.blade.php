@@ -83,6 +83,17 @@
          <!-- Products Table -->
          <div class="card shadow mb-4">
             <div class="card-body">
+                @if (session('success'))
+                <div class="alert alert-success">
+                    {{ session('success') }}
+                </div>
+                @endif
+
+                @if (session('error'))
+                <div class="alert alert-danger">
+                    {{ session('error') }}
+                </div>
+                @endif
                 {{-- {{ $products }} --}}
                 <div class="table-responsive">
                     <table class="table table-hover align-middle">
@@ -124,7 +135,7 @@
                                         </div>
                                     </div>
                                 </td>
-                                <td>{{ $product->category_id }}</td>
+                                <td>{{ $product->category->title }}</td>
                                 {{-- <td><span class="badge category-badge badge-electronics">Electronics</span></td> --}}
                                 <td>${{ $product->price }}</td>
                                 <td>${{ $product->sale_price }}</td>
@@ -139,7 +150,7 @@
                                 <td><span class="product-status status-active"></span> {{ $product->status == 1 ? 'Active' : 'Inactive' }}</td>
                                 <td class="table-actions">
                                     <a href="{{ $product->id }}"><button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-eye"></i></button></a>
-                                    <a href="{{ $product->id }}"><button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button></a>
+                                    <a href="{{ route('product.edit',$product->id) }}"><button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button></a>
                                     <a href="{{ $product->id }}"><button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></a>
                                 </td>
                             </tr>

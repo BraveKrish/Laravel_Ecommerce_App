@@ -10,4 +10,9 @@ class ProductCategory extends Model
         'title','image','status'
     ];
 
+    // relation
+    public function products(){
+        return $this->hasMany(Product::class);
+    }
+
 }

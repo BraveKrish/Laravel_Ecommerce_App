@@ -33,6 +33,8 @@ Route::get('/admin',[DashboardController::class,'home'])->name('admin.home');
 Route::get('/admin/products', [ProductController::class,'index'])->name('admin.products');
 Route::get('/admin/create-product',[ProductController::class, 'create'])->name('create.product');
 Route::post('/product/store',[ProductController::class,'store'])->name('prodcut.store');
+Route::get('/products/{id}/edit',[ProductController::class,'edit'])->name('product.edit');
+Route::put('/products/{id}/update',[ProductController::class,'update'])->name('product.update');
 
 
 // web routes goes here
