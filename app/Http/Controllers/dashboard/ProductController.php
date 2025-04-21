@@ -106,4 +106,16 @@ class ProductController extends Controller
 
 
     }
+
+    public function delete($id){
+        // dd($id);
+        try{
+            $product = Product::findOrFail($id);
+            // dd($product->toArray());
+            $product->delete();
+            return redirect()->route('admin.products')->with('success', 'Product Deleted Successfully!!!');
+        }catch(\Exception $e){
+            return redirect()->route('admin.products')->with('error', 'Something went wrong: ' . $e->getMessage());
+        }
+    }
 }

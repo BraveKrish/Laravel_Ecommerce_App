@@ -7,6 +7,9 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <div>
+                <a href="{{ route('category.show') }}"><button class="btn btn-sm btn-primary">
+                    <i class="fas fa-plus fa-sm"></i> Product Categories
+                </button></a>
                 <button class="btn btn-sm btn-outline-secondary me-2">
                     <i class="fas fa-download fa-sm"></i> Generate Report
                 </button>
@@ -151,7 +154,12 @@
                                 <td class="table-actions">
                                     <a href="{{ $product->id }}"><button class="btn btn-sm btn-outline-primary me-1"><i class="fas fa-eye"></i></button></a>
                                     <a href="{{ route('product.edit',$product->id) }}"><button class="btn btn-sm btn-outline-secondary me-1"><i class="fas fa-edit"></i></button></a>
-                                    <a href="{{ $product->id }}"><button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button></a>
+                                    {{-- delete icon --}}
+                                    <form action="{{ route('product.delete',$product->id) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button class="btn btn-sm btn-outline-danger"><i class="fas fa-trash"></i></button>
+                                </form>
                                 </td>
                             </tr>
 

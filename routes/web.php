@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\auth\AuthenticationController;
+use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\ProductController;
 use App\Http\Controllers\site\AboutController;
@@ -35,6 +36,11 @@ Route::get('/admin/create-product',[ProductController::class, 'create'])->name('
 Route::post('/product/store',[ProductController::class,'store'])->name('prodcut.store');
 Route::get('/products/{id}/edit',[ProductController::class,'edit'])->name('product.edit');
 Route::put('/products/{id}/update',[ProductController::class,'update'])->name('product.update');
+Route::delete('/products/{id}/delete',[ProductController::class, 'delete'])->name('product.delete');
+
+// product category routes
+Route::get('admin/product-categories',[CategoryController::class,'index'])->name('category.show');
+Route::post('category/store',[CategoryController::class,'store'])->name('category.store');
 
 
 // web routes goes here

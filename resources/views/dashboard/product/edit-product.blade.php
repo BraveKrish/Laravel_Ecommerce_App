@@ -13,7 +13,7 @@
                 {{-- <button class="btn btn-sm btn-primary">
                     Add New Product
                 </button> --}}
-                <h1 class="h3 mb-0 text-gray-800">Add New Product</h1>
+                <h1 class="h3 mb-0 text-gray-800">Edit Product</h1>
             </div>
         </div>
 
@@ -27,7 +27,7 @@
                 <div class="col-xl-12 col-md-6 mb-4">
                     <div class="card shadow">
                         <div class="card-header bg-primary text-white">
-                            <h5 class="mb-0">Add New Product</h5>
+                            <h5 class="mb-0">Edit Product</h5>
                         </div>
 
                         @if (session('success'))
@@ -141,7 +141,7 @@
                                 
                                 <div class="d-grid gap-2 d-md-flex justify-content-md-end">
                                     <button type="reset" class="btn btn-secondary me-md-2">Clear</button>
-                                    <button type="submit" class="btn btn-primary">Add Product</button>
+                                    <button type="submit" class="btn btn-primary">Edit Product</button>
                                 </div>
                             </form>
                         </div>
