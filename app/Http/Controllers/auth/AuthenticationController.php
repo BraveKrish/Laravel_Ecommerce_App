@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\auth;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
 class AuthenticationController extends Controller
@@ -14,7 +15,25 @@ class AuthenticationController extends Controller
 
     // post form of method :- form submit ani database samma purauxa
     public function login(Request $request){
+        // dd($request->all());
+        try{
+            $data = $request->validate([
+                'email' => 'required|email',
+                'password' => 'required|min:8'
+            ]);
 
+            if(Auth::attempt($data)){
+                $request->session()->regenerate();
+                return redirect()->intended('/admin')->with('success','Login successfully');
+            }
+
+            return back()->withErrors([
+                'email' => 'The provided credentials do not match our records.',
+            ])->onlyInput('email');
+
+        }catch(\Exception $e){
+            return redirect()->back()->with('error','Something went wrong');
+        }
     }
 
     public function showForgetPassword(){

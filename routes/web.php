@@ -24,6 +24,12 @@ use Illuminate\Support\Facades\Route;
 
 // auth route
 Route::get('/',[AuthenticationController::class,'showLogin'])->name('login.page');
+Route::post('/login',[AuthenticationController::class,'login'])->name('login');
+
+
+
+
+
 Route::get('/forget-password',[AuthenticationController::class,'showForgetPassword'])->name('forget.password');
 
 
