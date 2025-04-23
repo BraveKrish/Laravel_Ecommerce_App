@@ -34,7 +34,10 @@ Route::get('/forget-password',[AuthenticationController::class,'showForgetPasswo
 
 
 // dashboard routes goes here
-Route::get('/admin',[DashboardController::class,'home'])->name('admin.home');
+Route::middleware(['auth','is_admin'])->group(function (){
+    Route::get('/admin',[DashboardController::class,'home'])->name('admin.home');
+});
+
 
 // product routes
 Route::get('/admin/products', [ProductController::class,'index'])->name('admin.products');

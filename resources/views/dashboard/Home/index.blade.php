@@ -8,6 +8,19 @@
         <div class="d-flex justify-content-between align-items-center mb-4">
             <h1 class="h3 mb-0 text-gray-800">Dashboard</h1>
             <div>
+                {{-- {{ 
+                    // dd(Auth::check())
+                    // dd(Auth::user()->toArray())
+                    // dd(Auth::user()->role)
+
+                  
+                }} --}}
+
+                {{-- @if (Auth::check())
+                    {{ dd(Auth::user()->role) }}
+                @else
+                    {{ dd('not logged in') }}
+                @endif --}}
                 <button class="btn btn-sm btn-outline-secondary me-2">
                     <i class="fas fa-download fa-sm"></i> Generate Report
                 </button>
