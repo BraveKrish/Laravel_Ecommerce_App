@@ -39,4 +39,11 @@ class AuthenticationController extends Controller
     public function showForgetPassword(){
         return view('auth.forget-password');
     }
+
+    public function logout(Request $request){
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('login.page')->with('success','Logout successfully');
+    }
 }

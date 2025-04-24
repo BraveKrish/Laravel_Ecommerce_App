@@ -23,7 +23,7 @@ use Illuminate\Support\Facades\Route;
 
 
 // auth route
-Route::get('/',[AuthenticationController::class,'showLogin'])->name('login.page');
+Route::get('/login',[AuthenticationController::class,'showLogin'])->name('login.page');
 Route::post('/login',[AuthenticationController::class,'login'])->name('login');
 
 
@@ -36,22 +36,33 @@ Route::get('/forget-password',[AuthenticationController::class,'showForgetPasswo
 // dashboard routes goes here
 Route::middleware(['auth','is_admin'])->group(function (){
     Route::get('/admin',[DashboardController::class,'home'])->name('admin.home');
+
+    Route::post('admin/logout',[AuthenticationController::class,'logout'])->name('admin.logout');
+
+    // product routes
+    Route::get('/admin/products', [ProductController::class,'index'])->name('admin.products');
+    Route::get('/admin/create-product',[ProductController::class, 'create'])->name('create.product');
+    Route::post('/product/store',[ProductController::class,'store'])->name('prodcut.store');
+    Route::get('/products/{id}/edit',[ProductController::class,'edit'])->name('product.edit');
+    Route::put('/products/{id}/update',[ProductController::class,'update'])->name('product.update');
+    Route::delete('/products/{id}/delete',[ProductController::class, 'delete'])->name('product.delete');
+
+    // product category routes
+    Route::get('admin/product-categories',[CategoryController::class,'index'])->name('category.show');
+    Route::post('category/store',[CategoryController::class,'store'])->name('category.store');
 });
 
 
-// product routes
-Route::get('/admin/products', [ProductController::class,'index'])->name('admin.products');
-Route::get('/admin/create-product',[ProductController::class, 'create'])->name('create.product');
-Route::post('/product/store',[ProductController::class,'store'])->name('prodcut.store');
-Route::get('/products/{id}/edit',[ProductController::class,'edit'])->name('product.edit');
-Route::put('/products/{id}/update',[ProductController::class,'update'])->name('product.update');
-Route::delete('/products/{id}/delete',[ProductController::class, 'delete'])->name('product.delete');
 
-// product category routes
-Route::get('admin/product-categories',[CategoryController::class,'index'])->name('category.show');
-Route::post('category/store',[CategoryController::class,'store'])->name('category.store');
 
 
 // web routes goes here
 // Route::get('/',[HomeController::class,'index']);
 Route::get('/about',[AboutController::class,'index'])->name('about');
+
+
+// frontend routes goes here
+Route::get('/', function(){
+    return view('frontend.home.home');
+});
+

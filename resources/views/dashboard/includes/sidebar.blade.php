@@ -7,6 +7,11 @@
             <i class="fas fa-tachometer-alt"></i>
             <span>Dashboard</span>
         </a>
+
+        <a href="#" class="menu-item">
+            <i class="fas fa-user"></i>
+            <span>User</span>
+        </a>
         <a href="{{ route('admin.products') }}" class="menu-item">
             <i class="fas fa-shopping-bag"></i>
             <span>Products</span>
@@ -31,5 +36,13 @@
             <i class="fas fa-cog"></i>
             <span>Settings</span>
         </a>
+
+        <form action="{{ route('admin.logout') }}" method="post">
+            @csrf
+        <button type="submit" class="btn btn-dark">
+            <i class="fas fa-cog"></i>
+            <span>Logout</span>
+        </button>
+    </form>
     </div>
 </div>
