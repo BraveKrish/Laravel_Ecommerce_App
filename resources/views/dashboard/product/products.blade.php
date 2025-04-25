@@ -108,7 +108,8 @@
                                         <input class="form-check-input" type="checkbox" id="selectAll">
                                     </div>
                                 </th>
-                                <th>Product</th>
+                                {{-- <th>Featured Image</th> --}}
+                                <th>Product Name</th>
                                 {{-- <th>SKU</th> --}}
                                 <th>Category</th>
                                 <th>Price</th>
@@ -132,7 +133,7 @@
                                 </td>
                                 <td>
                                     <div class="d-flex align-items-center">
-                                        {{-- <img src="/api/placeholder/50/50" class="product-image me-3" alt="iPhone 13 Pro"> --}}
+                                        <img src="{{ asset($product->featured_image) }}" class="product-image me-3" alt="product image">
                                         <div>
                                             <div class="fw-medium">{{ $product->name }}</div>
                                             {{-- <div class="text-muted small">Apple</div> --}}

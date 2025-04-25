@@ -123,9 +123,16 @@
                                             <label for="productImage" class="form-label">Product Image</label>
                                             <input type="file" class="form-control" name="featured_image" id="productImage" accept="image/*" onchange="previewImage(this)">
                                             <div class="mt-3">
+                                                <p class="text-muted small">Old Image</p>
+                                                <div class="p-3 border rounded">
+                                                    <img height="200px" width="200px" src="{{ asset($product->featured_image) }}" class="img-fluid" alt="Product Preview">
+                                                    {{-- <p class="text-muted mb-0" id="noImageText">No image selected</p> --}}
+                                                </div>
+                                            </div>
+                                            <div class="mt-3">
                                                 <p class="text-muted small">Preview:</p>
-                                                <div class="text-center p-3 border rounded" id="imagePreviewContainer">
-                                                    <img id="imagePreview" class="img-fluid d-none" alt="Product Preview">
+                                                <div class="p-3 border rounded" id="imagePreviewContainer">
+                                                    <img height="200px" width="200px" id="imagePreview" class="img-fluid d-none" alt="Product Preview">
                                                     <p class="text-muted mb-0" id="noImageText">No image selected</p>
                                                 </div>
                                             </div>

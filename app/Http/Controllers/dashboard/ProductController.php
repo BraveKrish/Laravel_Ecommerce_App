@@ -43,7 +43,7 @@ class ProductController extends Controller
                 'is_featured' => 'nullable|string',
                 'price' => 'required',
                 'sale_price' => 'nullable',
-                'featured_image' => 'nullable|string',
+                'featured_image' => 'required|file|max:2048',
                 'qty' => 'required|numeric',
             ]);
 
@@ -53,6 +53,18 @@ class ProductController extends Controller
             }else{
                 $data['is_featured'] = 0;
             }
+
+            // file/media upload logic
+            if($request->hasFile('featured_image')){
+                $file = $request->file('featured_image');
+                // uploads/product_media/mobileproduct.jpg
+                $filename = time().'.'.$file->getClientOriginalExtension();
+                $file->move(public_path('uploads/product_media'),$filename);
+
+                // uploads/product_media/mobileproduct.jpg
+                $data['featured_image'] = 'uploads/product_media/'.$filename;
+            }
+
 
             Product::create($data);
 
@@ -85,7 +97,7 @@ class ProductController extends Controller
                 'is_featured' => 'nullable|string',
                 'price' => 'required',
                 'sale_price' => 'nullable',
-                'featured_image' => 'nullable|string',
+                'featured_image' => 'nullable|file|max:2048',
                 'qty' => 'required|numeric',
             ]);
 
@@ -95,6 +107,18 @@ class ProductController extends Controller
             }else{
                 $data['is_featured'] = 0;
             }
+
+            // file/media upload logic
+            if($request->hasFile('featured_image')){
+                $file = $request->file('featured_image');
+                // uploads/product_media/mobileproduct.jpg
+                $filename = time().'.'.$file->getClientOriginalExtension();
+                $file->move(public_path('uploads/product_media'),$filename);
+
+                // uploads/product_media/mobileproduct.jpg
+                $data['featured_image'] = 'uploads/product_media/'.$filename;
+            }
+            
 
             Product::where('id',$request->product_id)->update($data);
             // Product::update($data);

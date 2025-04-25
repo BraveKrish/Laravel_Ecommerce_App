@@ -56,6 +56,8 @@ Route::middleware(['auth','is_admin'])->group(function (){
 
 
 
+
+
 // web routes goes here
 // Route::get('/',[HomeController::class,'index']);
 Route::get('/about',[AboutController::class,'index'])->name('about');

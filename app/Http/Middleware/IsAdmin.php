@@ -22,10 +22,10 @@ class IsAdmin
             }
         }
 
-        // return $next($request);
-        // return redirect('/')->with('error','You are not authorized to access this page');
-        return response()->json([
-            'message' => 'You are not authorized to access this page'
-        ], 403);
+        return $next($request);
+        return redirect('/')->with('error','You are not authorized to access this page');
+        // return response()->json([
+        //     'message' => 'You are not authorized to access this page'
+        // ], 403);
     }
 }
