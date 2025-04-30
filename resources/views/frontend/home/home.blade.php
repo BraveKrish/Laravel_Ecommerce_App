@@ -5,6 +5,7 @@
 @section('main-content')
 <section class="hero-section">
     <div class="container">
+        {{-- {{ dd($featuredProducts->toArray()) }} --}}
         <div class="row align-items-center">
             <div class="col-md-6 hero-content">
                 <h1 class="mb-4">Summer Collection 2025</h1>
@@ -65,13 +66,19 @@
 
 <!-- Featured Products -->
 <section class="container mb-5">
+    {{-- {{ $featuredProducts }} --}}
     <h2 class="section-title">Featured Products</h2>
     <div class="row">
+        @foreach ($featuredProducts as $product)
+        {{-- {{ $product }} --}}
         <div class="col-md-3 col-sm-6">
             <div class="card product-card">
                 <div class="position-relative">
-                    <img src="/api/placeholder/400/400" class="card-img-top" alt="Product 1">
-                    <span class="discount-badge">-20%</span>
+                    <img src="{{ asset($product->featured_image) }}" class="card-img-top" alt="Product 1">
+                    @if ($product->discount_percent > 0)
+                    <span class="discount-badge">{{ $product->discount_percent }}% OFF</span>
+                    @endif
+                    
                     <div class="product-action d-flex">
                         <a href="#" class="product-action-btn"><i class="bi bi-heart"></i></a>
                         <a href="#" class="product-action-btn"><i class="bi bi-eye"></i></a>
@@ -79,16 +86,20 @@
                     </div>
                 </div>
                 <div class="card-body">
-                    <h5 class="card-title">Premium Cotton T-shirt</h5>
-                    <p class="card-text"><small class="text-muted">Men's Fashion</small></p>
+                    <h5 class="card-title">{{ $product->name }}</h5>
+                    <p class="card-text"><small class="text-muted">{{ $product->category->title }}</small></p>
                     <div class="d-flex align-items-center">
-                        <span class="original-price">$49.99</span>
-                        <span class="price">$39.99</span>
+                        @if ($product->discount_percent > 0)
+                            <span class="original-price">${{ $product->price }}</span>
+                        @endif
+                        
+                        <span class="price">${{ $product->sale_price }}</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-sm-6">
+        @endforeach
+        {{-- <div class="col-md-3 col-sm-6">
             <div class="card product-card">
                 <div class="position-relative">
                     <img src="/api/placeholder/400/400" class="card-img-top" alt="Product 2">
@@ -148,7 +159,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> --}}
     </div>
 </section>
 

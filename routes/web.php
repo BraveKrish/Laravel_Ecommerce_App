@@ -4,8 +4,10 @@ use App\Http\Controllers\auth\AuthenticationController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\ProductController;
-use App\Http\Controllers\site\AboutController;
-use App\Http\Controllers\site\HomeController;
+
+use App\Http\Controllers\frontend\HomeController;
+
+
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -59,12 +61,13 @@ Route::middleware(['auth','is_admin'])->group(function (){
 
 
 // web routes goes here
-// Route::get('/',[HomeController::class,'index']);
-Route::get('/about',[AboutController::class,'index'])->name('about');
+
 
 
 // frontend routes goes here
-Route::get('/', function(){
-    return view('frontend.home.home');
-});
+Route::get('/',[HomeController::class, 'index'])->name('site.home');
 
+
+// Route::get('/', function(){
+//     return view('frontend.home.home');
+// });

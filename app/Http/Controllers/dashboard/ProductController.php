@@ -108,8 +108,21 @@ class ProductController extends Controller
                 $data['is_featured'] = 0;
             }
 
+            $product = Product::findOrFail($request->product_id);
+
+            // dd($product->toArray());
+
+          
+            
+
             // file/media upload logic
             if($request->hasFile('featured_image')){
+
+                $oldFile = $product->featured_image;
+                if(file_exists($oldFile)){
+                    unlink($oldFile);
+                }
+
                 $file = $request->file('featured_image');
                 // uploads/product_media/mobileproduct.jpg
                 $filename = time().'.'.$file->getClientOriginalExtension();
@@ -135,7 +148,13 @@ class ProductController extends Controller
         // dd($id);
         try{
             $product = Product::findOrFail($id);
-            // dd($product->toArray());
+            // dd($product->toArray()); // dump and die
+            $oldImage = $product->featured_image;
+            // $result = file_exists('uploads/product_media/1745596503.png');
+            // dd($result);
+            if(file_exists($oldImage)){
+                unlink($oldImage);
+            }
             $product->delete();
             return redirect()->route('admin.products')->with('success', 'Product Deleted Successfully!!!');
         }catch(\Exception $e){
