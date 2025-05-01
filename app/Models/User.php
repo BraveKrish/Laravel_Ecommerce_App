@@ -23,6 +23,7 @@ class User extends Authenticatable
         'phone',
         'role',
         'password',
+        'is_terms_conditon_active',
         'status',
     ];
 

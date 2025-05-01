@@ -5,6 +5,7 @@
 @section('main-content')
 <section class="hero-section">
     <div class="container">
+        {{-- {{ Auth::check() }} --}}
         {{-- {{ dd($featuredProducts->toArray()) }} --}}
         <div class="row align-items-center">
             <div class="col-md-6 hero-content">

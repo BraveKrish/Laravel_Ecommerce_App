@@ -4,7 +4,7 @@ use App\Http\Controllers\auth\AuthenticationController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\ProductController;
-
+use App\Http\Controllers\frontend\AuthenticationController as SiteAuthenticationController;
 use App\Http\Controllers\frontend\HomeController;
 
 
@@ -67,6 +67,19 @@ Route::middleware(['auth','is_admin'])->group(function (){
 // frontend routes goes here
 Route::get('/',[HomeController::class, 'index'])->name('site.home');
 
+
+// auth routes (site)
+Route::get('/login',function(){
+    return view('frontend.auth.login-register');
+})->name('login.register');
+Route::post('/register',[SiteAuthenticationController::class, 'register'])->name('user.register');
+Route::post('/login',[SiteAuthenticationController::class, 'login'])->name('user.login');
+Route::post('/logout',[SiteAuthenticationController::class,'logout'])->name('user.logout');
+
+
+Route::get('/profile', function(){
+    return 'profile page';
+});
 
 // Route::get('/', function(){
 //     return view('frontend.home.home');
