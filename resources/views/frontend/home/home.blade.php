@@ -5,7 +5,7 @@
 @section('main-content')
 <section class="hero-section">
     <div class="container">
-        {{-- {{ Auth::check() }} --}}
+        {{-- {{ Auth::user() }} --}}
         {{-- {{ dd($featuredProducts->toArray()) }} --}}
         <div class="row align-items-center">
             <div class="col-md-6 hero-content">
@@ -81,7 +81,8 @@
                     @endif
                     
                     <div class="product-action d-flex">
-                        <a href="#" class="product-action-btn"><i class="bi bi-heart"></i></a>
+                        {{-- <a href="#" class="product-action-btn"><i class="bi bi-heart"></i></a> --}}
+                        <button class="btn product-action-btn wishlist-toggle-btn" data-id="{{ $product->id }}"><i class="bi bi-heart }}" id="wishlist-icon-{{ $product->id }}" ></i></button>
                         <a href="#" class="product-action-btn"><i class="bi bi-eye"></i></a>
                         <a href="#" class="product-action-btn"><i class="bi bi-cart-plus"></i></a>
                     </div>
@@ -281,4 +282,7 @@
         </div>
     </div>
 </section>
+@push('home-wishlist-scripts')
+    @include('frontend.includes.wishlist-script')
+@endpush
 @endsection

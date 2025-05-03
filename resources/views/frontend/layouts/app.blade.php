@@ -7,7 +7,7 @@
     <!-- Bootstrap CSS -->
     {{-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet"> --}}
     @include('frontend.includes.header')
-
+    @stack('styles')
 </head>
 <body>
     <!-- Navbar -->
@@ -22,5 +22,7 @@
 
     <!-- Bootstrap JS -->
     <script src="{{ asset('dashboard/assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    @stack('home-wishlist-scripts')
 </body>
 </html>

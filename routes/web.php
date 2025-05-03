@@ -6,8 +6,7 @@ use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\ProductController;
 use App\Http\Controllers\frontend\AuthenticationController as SiteAuthenticationController;
 use App\Http\Controllers\frontend\HomeController;
-
-
+use App\Http\Controllers\frontend\WishlistController;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -24,9 +23,9 @@ use Illuminate\Support\Facades\Route;
 // });
 
 
-// auth route
-Route::get('/login',[AuthenticationController::class,'showLogin'])->name('login.page');
-Route::post('/login',[AuthenticationController::class,'login'])->name('login');
+// auth route (admin dashboard login)
+Route::get('/admin/login',[AuthenticationController::class,'showLogin'])->name('login.page');
+Route::post('/admin/login',[AuthenticationController::class,'login'])->name('admin.login');
 
 
 
@@ -84,3 +83,7 @@ Route::get('/profile', function(){
 // Route::get('/', function(){
 //     return view('frontend.home.home');
 // });
+
+// wishlist routes
+Route::get('/wishlist',[WishlistController::class, 'index'])->name('wishlist.page');
+Route::post('/wishlist/toggle',[WishlistController::class, 'wishlistToggle'])->name('wishlist.toggle');

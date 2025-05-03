@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top">
     <div class="container">
-        <a class="navbar-brand" href="#">ModernShop</a>
+        <a class="navbar-brand" href="{{ route('site.home') }}">ModernShop</a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -8,14 +8,14 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav me-auto">
                 <li class="nav-item">
-                    <a class="nav-link active" href="#">Home</a>
+                    <a class="nav-link active" href="{{ route('site.home') }}">Home</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#">Shop</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Collections</a>
-                </li>
+                {{-- <li class="nav-item">
+                    <a class="nav-link" href="{{ route('wishlist.page') }}">Wishlist</a>
+                </li> --}}
                 <li class="nav-item">
                     <a class="nav-link" href="#">Blog</a>
                 </li>
@@ -39,7 +39,7 @@
                 </div>
                 <div class="d-flex">
                     <a href="#" class="btn btn-link text-dark me-2"><i class="bi bi-person fs-5"></i></a>
-                    <a href="#" class="btn btn-link text-dark me-2"><i class="bi bi-heart fs-5"></i></a>
+                    <a href="{{ route('wishlist.page') }}" class="btn btn-link text-dark me-2"><i class="bi bi-heart fs-5"></i></a>
                     <a href="#" class="btn btn-link text-dark position-relative">
                         <i class="bi bi-cart3 fs-5"></i>
                         <span
