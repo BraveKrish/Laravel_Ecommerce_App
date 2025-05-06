@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\auth\AuthenticationController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\ProductController;
@@ -87,3 +88,7 @@ Route::get('/profile', function(){
 // wishlist routes
 Route::get('/wishlist',[WishlistController::class, 'index'])->name('wishlist.page');
 Route::post('/wishlist/toggle',[WishlistController::class, 'wishlistToggle'])->name('wishlist.toggle');
+
+// cart routes
+Route::get('/cart-items',[CartController::class,'index'])->name('show.cart.item');
+Route::post('/cart/add',[CartController::class,'addToCart'])->name('add.to.cart');

@@ -84,7 +84,11 @@
                         {{-- <a href="#" class="product-action-btn"><i class="bi bi-heart"></i></a> --}}
                         <button class="btn product-action-btn wishlist-toggle-btn" data-id="{{ $product->id }}"><i class="bi bi-heart }}" id="wishlist-icon-{{ $product->id }}" ></i></button>
                         <a href="#" class="product-action-btn"><i class="bi bi-eye"></i></a>
-                        <a href="#" class="product-action-btn"><i class="bi bi-cart-plus"></i></a>
+                        <form action="{{ route('add.to.cart') }}" method="POST">
+                        @csrf
+                        <input type="hidden" name="product_id" value="{{ $product->id }}">
+                        <button type="submit" class="product-action-btn btn"><i class="bi bi-cart-plus"></i></button>
+                        </form>
                     </div>
                 </div>
                 <div class="card-body">
