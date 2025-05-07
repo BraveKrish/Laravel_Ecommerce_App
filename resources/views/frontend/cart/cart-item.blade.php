@@ -52,6 +52,7 @@
     <h1 class="mb-4">Shopping Cart</h1>
     
     <div class="row">
+        {{-- {{ dd($carts->items->toArray()) }} --}}
         <!-- Cart Items -->
         <div class="col-lg-8">
             <!-- Regular cart view (when items exist) -->
@@ -60,7 +61,7 @@
                     <div class="card-header bg-white py-3">
                         <div class="row">
                             <div class="col-6">
-                                <h5 class="mb-0">Cart Items (3)</h5>
+                                <h5 class="mb-0">Cart Items ({{ $carts->items->count() }})</h5>
                             </div>
                             <div class="col-6 text-end">
                                 <button class="btn btn-link p-0 text-danger" onclick="showEmptyCart()">Clear Cart</button>
@@ -69,20 +70,22 @@
                     </div>
                     <div class="card-body">
                         <!-- Item 1 -->
+                        @foreach ($carts->items as $item)
+                        {{-- {{ $item->product }} --}}
                         <div class="row mb-4 border-bottom pb-4">
                             <div class="col-md-2 col-4">
-                                <img src="/api/placeholder/300/300" alt="Product" class="img-fluid rounded cart-item-img">
+                                <img src="{{ asset($item->product->featured_image) }}" alt="Product" class="img-fluid rounded cart-item-img">
                             </div>
                             <div class="col-md-10 col-8">
                                 <div class="row">
                                     <div class="col-md-5">
                                         <a href="#" class="product-link">
-                                            <h5 class="mb-1">Premium Cotton Shirt</h5>
+                                    <h5 class="mb-1">{{ $item->product->name }}</h5>
                                         </a>
-                                        <p class="mb-1 text-muted">Size: M | Color: Blue</p>
+                                        <p class="mb-1 text-muted">{{ $item->product->category->title }} | Brand: Test Brand</p>
                                         <p class="mb-3"><span class="badge bg-success">In Stock</span></p>
                                         <div class="d-md-none d-flex justify-content-between align-items-center mb-2">
-                                            <span class="fw-bold">$39.99</span>
+                                            <span class="fw-bold">${{ $item->product->price }}</span>
                                         </div>
                                     </div>
                                     <div class="col-md-3 col-5">
@@ -93,7 +96,7 @@
                                         </div>
                                     </div>
                                     <div class="col-md-2 col-7 d-none d-md-block">
-                                        <span class="fw-bold">$39.99</span>
+                                        <span style="text-decoration:line-through;color:#999999 !important;" class="fw-bold">${{ $item->product->price }}</span>
                                     </div>
                                     <div class="col-md-2 text-md-end">
                                         <div class="d-flex justify-content-between align-items-center">
@@ -102,7 +105,7 @@
                                                     <i class="bi bi-trash"></i>
                                                 </button>
                                             </div>
-                                            <span class="fw-bold item-total">$39.99</span>
+                                            <span class="fw-bold item-total">${{ $item->product->sale_price }}</span>
                                             <div class="d-none d-md-inline-block">
                                                 <button class="btn btn-sm p-0 ms-2 text-danger" onclick="removeCartItem(this)" title="Remove item">
                                                     <i class="bi bi-trash"></i>
@@ -113,8 +116,9 @@
                                 </div>
                             </div>
                         </div>
+                        @endforeach
 
-                        <!-- Item 2 -->
+                        {{-- <!-- Item 2 -->
                         <div class="row mb-4 border-bottom pb-4">
                             <div class="col-md-2 col-4">
                                 <img src="/api/placeholder/300/300" alt="Product" class="img-fluid rounded cart-item-img">
@@ -204,7 +208,7 @@
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
                 </div>
 
@@ -234,7 +238,7 @@
                 <div class="card-body">
                     <div class="d-flex justify-content-between mb-2">
                         <span>Subtotal</span>
-                        <span id="cart-subtotal" class="fw-bold">$179.97</span>
+                        <span id="cart-subtotal" class="fw-bold">${{ $subTotal }}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Shipping</span>

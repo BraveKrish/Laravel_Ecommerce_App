@@ -57,45 +57,51 @@
         <!-- Wishlist Items -->
         <div class="row">
             <!-- Item 1 -->
+            {{-- {{ dd($wishlists->toArray()) }} --}}
             @foreach ($wishlists as $wishlist)
-            <div class="col-12 mb-4">
-                <div class="card wishlist-item border rounded">
-                    <div class="row g-0">
-                        <div class="col-md-3">
-                            <img src="{{ asset($wishlist->featured_image) }}" class="img-fluid rounded-start" width="300px"  alt="Wireless Headphones">
-                        </div>
-                        <div class="col-md-9">
-                            <div class="card-body d-flex flex-column h-100">
-                                <div class="d-flex justify-content-between align-items-start">
-                                    <h5 class="card-title">{{ $wishlist->name }}</h5>
-                                    <button class="btn btn-sm btn-wishlist p-0">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
-                                </div>
-                                <p class="card-text">{{ $wishlist->description }}</p>
-                                <div class="mt-auto d-flex justify-content-between align-items-center">
-                                    <div>
-                                        @if ($wishlist->sale_price < $wishlist->price)
-                                        <span class="price">${{ $wishlist->sale_price }}</span>
-                                        <span class="original-price ms-2">${{ $wishlist->price }}</span>
-                                        @else
-                                        <span class="price ms-2">${{ $wishlist->price }}</span>
-                                        @endif
-                                        
-                                            @if ($wishlist->sale_price < $wishlist->price)
-                                            <span class="badge bg-danger ms-2">SALE</span>
-                                            @endif
-                                        
+                <div class="col-12 mb-4">
+                    <div class="card wishlist-item border rounded">
+                        <div class="row g-0">
+                            <div class="col-md-3">
+                                <img src="{{ asset($wishlist->featured_image) }}" class="img-fluid rounded-start"
+                                    width="300px" alt="Wireless Headphones">
+                            </div>
+                            <div class="col-md-9">
+                                <div class="card-body d-flex flex-column h-100">
+                                    <div class="d-flex justify-content-between align-items-start">
+                                        <h5 class="card-title">{{ $wishlist->name }}</h5>
+                                        <button class="btn btn-sm btn-wishlist p-0">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </div>
-                                    <div>
-                                        <button class="btn btn-outline-primary me-2">Add to Cart</button>
+                                    <p class="card-text">{{ $wishlist->description }}</p>
+                                    <div class="mt-auto d-flex justify-content-between align-items-center">
+                                        <div>
+                                            @if ($wishlist->sale_price < $wishlist->price)
+                                                <span class="price">${{ $wishlist->sale_price }}</span>
+                                                <span class="original-price ms-2">${{ $wishlist->price }}</span>
+                                            @else
+                                                <span class="price ms-2">${{ $wishlist->price }}</span>
+                                            @endif
+
+                                            @if ($wishlist->sale_price < $wishlist->price)
+                                                <span class="badge bg-danger ms-2">SALE</span>
+                                            @endif
+
+                                        </div>
+                                        <div>
+                <form action="{{ route('add.to.cart') }}" method="POST">
+                    @csrf
+                    <input type="hidden" name="product_id" value="{{ $wishlist->id }}">
+                    <button type="submit" class="btn btn-outline-primary me-2">Add to Cart</button>
+                </form>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
             @endforeach
 
             <!-- Item 2 -->

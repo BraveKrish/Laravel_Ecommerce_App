@@ -7,8 +7,21 @@ use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
     // show cart item page or view
-    public function index(){
-        return view('frontend.cart.cart-item');
+    public function viewCart(){
+        $carts = Auth::user()->cart()->with('items.product.category')->first();
+        // dd($carts->items->toArray());
+
+        $subTotal = 0;
+        foreach($carts->items as $item) {
+            $total = ($item->quantity * $item->product->sale_price);
+            $subTotal += $total; // $subTotal = $subTotal + $total;
+            // echo $item->quantity * $item->product->price; 
+        }
+
+        // dd($subTotal);
+
+        // dd($data->toArray());
+        return view('frontend.cart.cart-item',compact('carts', 'subTotal'));
     }
 
     public function addToCart(Request $request){
