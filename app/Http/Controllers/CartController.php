@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 class CartController extends Controller
 {
+
     // show cart item page or view
     public function viewCart(){
         $carts = Auth::user()->cart()->with('items.product.category')->first();
@@ -18,11 +19,48 @@ class CartController extends Controller
             // echo $item->quantity * $item->product->price; 
         }
 
-        // dd($subTotal);
+        $user = Auth::user();
+        $shippingCharge = $this->calculateShippingCharge($subTotal, $user);
+        $taxRate = 0.10;
+        $taxAmount = $subTotal * $taxRate;
+
+        $totalAmount = $subTotal + $taxAmount + $shippingCharge;
+        // dd($total);
 
         // dd($data->toArray());
-        return view('frontend.cart.cart-item',compact('carts', 'subTotal'));
+        return view('frontend.cart.cart-item',compact('carts', 'subTotal','taxAmount','shippingCharge','totalAmount'));
     }
+
+    // function or method to calculate shipping charge
+    public function calculateShippingCharge($subtotal, $user){
+        if($subtotal <= 500){
+            return 0;
+        }
+
+        $charge = 0;
+        if($user->city == 'Kathmandu'){
+            $charge = 100;
+            return $charge;
+        }elseif ($user->city == 'Pokhara'){
+            $charge = 150;
+            return $charge;
+        }
+        elseif ($user->city == 'Dhangadi'){
+            $charge = 250;
+            return $charge;
+        }
+        elseif ($user->city == 'Itahari'){
+            $charge = 175;
+            return $charge;
+        }else{
+            // default
+            $charge = 80;
+            return $charge; 
+       }
+    }
+
+ 
+
 
     public function addToCart(Request $request){
         // dd($request->all());

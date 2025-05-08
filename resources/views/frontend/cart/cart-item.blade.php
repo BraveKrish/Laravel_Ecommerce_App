@@ -242,16 +242,16 @@
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Shipping</span>
-                        <span id="cart-shipping">$5.99</span>
+                        <span id="cart-shipping">${{ $shippingCharge }}</span>
                     </div>
                     <div class="d-flex justify-content-between mb-2">
                         <span>Tax</span>
-                        <span id="cart-tax">$14.40</span>
+                        <span id="cart-tax">${{ $taxAmount }}</span>
                     </div>
                     <hr>
                     <div class="d-flex justify-content-between mb-4">
                         <span class="fw-bold">Total</span>
-                        <span id="cart-total" class="fw-bold fs-5">$200.36</span>
+                        <span id="cart-total" class="fw-bold fs-5">${{ $totalAmount }}</span>
                     </div>
 
                     <!-- Promo Code -->
