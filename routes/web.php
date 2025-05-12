@@ -8,6 +8,8 @@ use App\Http\Controllers\dashboard\ProductController;
 use App\Http\Controllers\frontend\AuthenticationController as SiteAuthenticationController;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\frontend\WishlistController;
+use App\Http\Controllers\PromoCodeController;
+use App\Models\PromoCode;
 use Illuminate\Support\Facades\Route;
 
 // Route::get('/', function () {
@@ -52,6 +54,10 @@ Route::middleware(['auth','is_admin'])->group(function (){
     // product category routes
     Route::get('admin/product-categories',[CategoryController::class,'index'])->name('category.show');
     Route::post('category/store',[CategoryController::class,'store'])->name('category.store');
+
+    // coupon routes
+    Route::get('coupons/',[PromoCodeController::class,'index'])->name('admin.coupon');
+    Route::post('promocode/', [PromoCodeController::class, 'generatePromoCode'])->name('promocode.create');
 });
 
 

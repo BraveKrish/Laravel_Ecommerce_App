@@ -176,8 +176,8 @@
             <div class="col-lg-6">
                 <div class="offer-content">
                     <h2 class="mb-4">Special Offer</h2>
-                    <h3 class="mb-4">Get 25% Off On Your First Purchase!</h3>
-                    <p class="mb-4">Use code <strong>WELCOME25</strong> at checkout</p>
+                    <h3 class="mb-4">Get {{ number_format($promoCode->value, 0) }}% Off On Your First Purchase!</h3>
+                    <p class="mb-4">Use code <strong>{{ $promoCode->code }}</strong> at checkout</p>
                     <a href="#" class="btn btn-light btn-lg">Shop Now</a>
                 </div>
             </div>

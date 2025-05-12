@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\frontend;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\PromoCode;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -29,9 +30,13 @@ class HomeController extends Controller
 
         $hotProduct = Product::take(4)->get();
 
+        $promoCode = PromoCode::where('is_active', 1)->where('expires_at', '>', now())->orderBy('created_at','desc')->first();
+
+        // dd($promoCode->toArray());
+
         // dd($featuredProducts->toArray());
        
         // dd($discountAmount);
-        return view('frontend.home.home',compact('featuredProducts', 'hotProduct'));
+        return view('frontend.home.home',compact('featuredProducts', 'hotProduct','promoCode'));
     }
 }

@@ -16,6 +16,10 @@
             <i class="fas fa-shopping-bag"></i>
             <span>Products</span>
         </a>
+        <a href="{{ route('admin.coupon') }}" class="menu-item">
+            <i class="fas fa-tag"></i>
+            <span>Coupon</span>
+        </a>
         <a href="#" class="menu-item">
             <i class="fas fa-shopping-cart"></i>
             <span>Orders</span>
