@@ -38,4 +38,54 @@ class PromoCodeController extends Controller
 
         }
     }
+
+    public function applyPromoCode(Request $request){
+        // dd($request->all());
+        $promoCode = $request->promo_code;
+        $totalAmount = $request->total_amount;
+        try{
+            $promo = PromoCode::where('code', $promoCode)
+            ->where('expires_at','>',now())->first();
+            // dd($promoCode->toArray());
+
+            if(!$promo){
+                return back()->withError('Invalid Offer code!!!');
+            }
+
+            if($promo->expires_at && $promo->expires_at < now()){
+                return back()->withError('Offer code has been expired!!!');
+            }
+
+            if($promo->usages_limit && $promo->used_count > $promo->usages_limit){
+                return back()->withError('Offer code usages limit reached!!!');
+            }
+
+            // total amount after discount or offer applied
+            $am = ($totalAmount * $promo->value) / 100;
+            $amount = round($am);
+            // dd($amount);
+
+            // actual discount amount
+            $discountAmount = round($totalAmount - $amount);
+            // dd($discountAmount);
+
+            $promo->used_count += 1; // $promo->used_count = $promo->used_count + 1
+            $promo->save();
+
+            session([
+                'offer_applied' =>[
+                    'code' => $promo->code,
+                    'amount' => $amount,
+                    'discount' => $discountAmount
+                ]
+            ]);
+
+            return back()->withSuccess('Offer applied successfully! Discount: Rs.'. number_format($discountAmount));
+
+        }catch(\Exception $e){
+            // dd($e->getMessage());
+            return redirect()->back()->with('error', 'Something went wrong'. $e->getMessage());
+        }
+
+    }
 }

@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\auth\AuthenticationController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\dashboard\CategoryController;
 use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\ProductController;
@@ -98,3 +99,10 @@ Route::post('/wishlist/toggle',[WishlistController::class, 'wishlistToggle'])->n
 // cart routes
 Route::get('/cart-items',[CartController::class,'viewCart'])->name('show.cart.item');
 Route::post('/cart/add',[CartController::class,'addToCart'])->name('add.to.cart');
+
+// coupon code routes
+Route::post('/apply/coupon',[PromoCodeController::class,'applyPromoCode'])->name('apply.coupon');
+
+
+// checkout page routes
+Route::get('checkout/',[CheckoutController::class, 'checkoutIndex'])->name('procced.to.checkout');
