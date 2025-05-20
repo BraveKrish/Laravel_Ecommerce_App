@@ -234,12 +234,115 @@
                         <span>${{ $totalAmount }}</span>
                     </div>
 
+
+                    <form action="{{ route('place.order') }}" method="POST">
+                        @csrf
+
+                        @php
+                            $orderID = '#' .str_pad(random_int(0,9999999), 6, '0', STR_PAD_LEFT);
+                        @endphp
+
+
+                        <input type="hidden" name="order_id" value="{{ $orderID }}">
+                        <input type="hidden" name="total_amount" value="{{ $totalAmount }}">
+                     <div class="payment-methods mb-4">
+
+                            <h5 class="mb-3">Payment Method</h5>
+
+                            <!-- Cash on Delivery Option -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="cashOnDelivery"
+                                    value="cod" checked>
+                                <label class="form-check-label d-flex align-items-center" for="cashOnDelivery">
+                                    <i class="bi bi-cash me-2"></i> Cash on Delivery
+                                </label>
+                            </div>
+
+                            <!-- Wallet Payment Option -->
+                            <div class="form-check mb-2">
+                                <input class="form-check-input" type="radio" name="paymentMethod" id="walletPayment"
+                                    value="wallet">
+                                <label class="form-check-label" for="walletPayment">
+                                    Wallet Payment
+                                </label>
+                            </div>
+
+                            <!-- Wallet Options (Hidden by default) -->
+                            <div id="walletOptions" class="ms-4 mt-2 mb-3" style="display: none;">
+                                <div class="d-flex gap-3">
+                                    <!-- Khalti Option -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="walletType"
+                                            id="khaltiWallet" value="khalti">
+                                        <label class="form-check-label d-flex align-items-center" for="khaltiWallet">
+                                            <img src="{{ asset('frontend/images/khalti-logo.png') }}" alt="Khalti"
+                                                class="me-1" width="64" height="39">
+                                        </label>
+                                    </div>
+
+                                    <!-- eSewa Option -->
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="walletType"
+                                            id="esewaWallet" value="esewa">
+                                        <label class="form-check-label d-flex align-items-center" for="esewaWallet">
+                                            <img src="{{ asset('frontend/images/Esewa_logo.webp') }}" alt="eSewa"
+                                                class="me-1" width="60" height="39">
+
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                     <!-- Place Order Button -->
-                    <button class="btn btn-primary w-100" onclick="placeOrder()">
+                    <button type="submit" class="btn btn-primary w-100">
                         Place Order
                     </button>
+
+                    </form>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- JavaScript for showing/hiding wallet options -->
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    const walletPayment = document.getElementById('walletPayment');
+                    const cashOnDelivery = document.getElementById('cashOnDelivery');
+                    const walletOptions = document.getElementById('walletOptions');
+
+                    walletPayment.addEventListener('change', function() {
+                        if (this.checked) {
+                            walletOptions.style.display = 'block';
+                        }
+                    });
+
+                    cashOnDelivery.addEventListener('change', function() {
+                        if (this.checked) {
+                            walletOptions.style.display = 'none';
+                        }
+                    });
+                });
+
+                function placeOrder() {
+                    // Get selected payment method
+                    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+                    let walletType = null;
+
+                    if (paymentMethod === 'wallet') {
+                        walletType = document.querySelector('input[name="walletType"]:checked')?.value;
+                        if (!walletType) {
+                            alert('Please select a wallet payment option');
+                            return;
+                        }
+                    }
+
+                    // Here you can handle the order placement with the selected payment method
+                    console.log('Payment Method:', paymentMethod);
+                    console.log('Wallet Type:', walletType);
+
+                    // Continue with order processing...
+                }
+            </script>
 @endsection

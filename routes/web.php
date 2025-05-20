@@ -8,6 +8,7 @@ use App\Http\Controllers\dashboard\DashboardController;
 use App\Http\Controllers\dashboard\ProductController;
 use App\Http\Controllers\frontend\AuthenticationController as SiteAuthenticationController;
 use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\frontend\KhaltiPaymentController;
 use App\Http\Controllers\frontend\WishlistController;
 use App\Http\Controllers\PromoCodeController;
 use App\Models\PromoCode;
@@ -106,3 +107,12 @@ Route::post('/apply/coupon',[PromoCodeController::class,'applyPromoCode'])->name
 
 // checkout page routes
 Route::get('checkout/',[CheckoutController::class, 'checkoutIndex'])->name('procced.to.checkout');
+
+Route::post('place-order/',[CheckoutController::class, 'placeOrder'])->name('place.order');
+Route::get('khalti/pay',[CheckoutController::class, 'initiateKhalti'])->name('khalti.initiate');
+
+// khalti routes
+Route::post('/khalti/payment/initiate',[KhaltiPaymentController::class, 'initiatePayment'])->name('khalti.payment.initiate');
+
+// call back route (that display after transaction)
+Route::get('/khalti/payment/callback', [KhaltiPaymentController::class, 'paymentCallback'])->name('khalti.payment.callback');
